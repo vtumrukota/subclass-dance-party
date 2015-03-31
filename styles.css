@@ -22,12 +22,22 @@ body, a:link, a:visited, a:active{
   background-color: #777;
 }
 .dancer{
-  border:10px solid red;
+  border:10px solid black;
   border-radius:10px;
   position:absolute;
 }
 .guard {
+  border:10px solid red;
+  border-radius:10px;
+  position:absolute;
+}
+.forward{
   border:10px solid blue;
+  border-radius:10px;
+  position:absolute;
+}
+.center{
+  border:10px solid green;
   border-radius:10px;
   position:absolute;
 }

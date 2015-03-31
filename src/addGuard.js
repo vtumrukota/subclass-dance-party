@@ -2,7 +2,7 @@ var addGuard = function(top, left, timeBetweenSteps){
   // var blinkyDancer = (top, left, timeBetweenSteps);
 
   makeDancer.call(this, top, left, timeBetweenSteps);
-  this.$node = $('<span class="guard"></span>');
+  this.$node.addClass('guard');
 
 
 };
