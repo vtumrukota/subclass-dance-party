@@ -1,18 +1,77 @@
-$(document).on('click', '.dancer', function(){
-  console.log($(this).data().index);
-  console.log(window.dancers[$(this).data().index])
-});
-
-$(document).on('mouseover', '.dancer', function(){
-  $(this).animate({ "background-size": "200px" }, 10);
-});
-
-$(document).on('mouseout', '.dancer', function(){
-  $(this).animate({ "background-size": "175px" }, 10);
-});
-
 $(document).ready(function(){
   window.dancers = [];
+
+  var clicked = false;
+
+  $("#goback").click(function(){
+    window.dancers.forEach(function(el) {
+      el.$node.animate({top: el.top, left: el.left}, 600, 'swing', function() {
+        console.log('goback')
+      });
+    });
+  });
+
+      //Jump Ball feature
+  $("#jump").click(function(){
+
+    console.log('clicked');
+    $(".guard").animate({left: "10px"}, 600, 'swing', function(){
+      $(this).fadeOut('slow');
+      $(this).fadeIn('fast');
+    });
+
+    var right = $("body").width() - 200;
+    right += "px";
+
+    $(".center").animate({left: right}, 600, 'swing', function(){
+      $(this).fadeOut('slow');
+      $(this).fadeIn('fast');
+    });
+
+    var bottom = $("body").height() - 150;
+    bottom += "px";
+
+    $(".forward").animate({top: bottom}, 600, 'swing', function(){
+      $(this).fadeOut('slow');
+      $(this).fadeIn('fast');
+    });
+  });
+
+  $(document).on('click', '.dancer', function(){
+    var clickedIndex = $(this).data().index;
+    var x1 = window.dancers[clickedIndex].top;
+    var y1 = window.dancers[clickedIndex].left;
+    var shortest = [];
+
+    // console.log(x1 + ':' + y1);
+
+    // console.log($(this).css('transform'));
+
+    var theShortest = 1000000;
+    var theShortestDancer;
+
+    window.dancers.forEach(function(dancer, index) {
+      var distance = Math.sqrt(Math.pow(dancer.left - x1, 2) + Math.pow(dancer.top - y1, 2));
+      if (distance < theShortest && index !== clickedIndex) {
+        theShortest = distance;
+        theShortestDancer = dancer;
+      }
+    });
+
+    // console.log(theShortest)
+    console.log(theShortestDancer)
+
+    theShortestDancer.$node.css({'transform': 'rotate(90deg)'});
+    theShortestDancer.$node.css({'transform': 'rotate(0deg)'});
+  });
+
+  $(document).on('mouseover', '.dancer', function(){
+    $(this).animate({ "background-size": "200px" }, 10);
+  });
+
+  $(document).on('mouseout', '.dancer', function(){
+    $(this).animate({ "background-size": "175px" }, 10);
+  });
 
   $(".addDancerButton").on("click", function(event){
     /* This function sets up the click handlers for the create-dancer
@@ -50,34 +109,6 @@ $(document).ready(function(){
     } else {
       $('#centers').append(dancer.$node);
     }
-
-
-    //Jump Ball feature
-    $("#jump").click(function(){
-      $(".guard").animate({left: "10px"}, 2000, 'swing', function(){
-        // $(this).fadeOut('slow');
-        // $(this).fadeIn('fast');
-        console.log('Done' + );
-        });
-
-      var right = $("body").width() - 200;
-      right += "px";
-
-      $(".center").animate({left: right}, 2000, 'swing', function(){
-        $(this).fadeOut('slow');
-        $(this).fadeIn('fast');
-      });
-
-
-      var bottom = $("body").height() - 150;
-      bottom += "px";
-
-      $(".forward").animate({top: bottom}, 2000, 'swing', function(){
-        $(this).fadeOut('slow');
-        $(this).fadeIn('fast');
-      });
-    });
-
     // $('body').append(dancer.$node);
   });
 });

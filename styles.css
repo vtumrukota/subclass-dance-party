@@ -55,3 +55,15 @@ body, a:link, a:visited, a:active{
   background-size: 175px 127px;
   background-position: center;
 }
+
+.left {
+  left: 25px;
+}
+
+.right {
+  right: 25px;
+}
+
+.bottom {
+  bottom: 25px;
+}
