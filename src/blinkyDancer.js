@@ -8,7 +8,6 @@ var makeBlinkyDancer = function(top, left, timeBetweenSteps){
 
   // this.oldStep = blinkyDancer.step;
   // this.oldStep = this.step;
-  console.log(this);
 };
 
 makeBlinkyDancer.prototype = Object.create(makeDancer.prototype);

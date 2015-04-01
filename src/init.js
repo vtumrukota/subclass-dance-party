@@ -1,3 +1,16 @@
+$(document).on('click', '.dancer', function(){
+  console.log($(this).data().index);
+  console.log(window.dancers[$(this).data().index])
+});
+
+$(document).on('mouseover', '.dancer', function(){
+  $(this).animate({ "background-size": "200px" }, 10);
+});
+
+$(document).on('mouseout', '.dancer', function(){
+  $(this).animate({ "background-size": "175px" }, 10);
+});
+
 $(document).ready(function(){
   window.dancers = [];
 
@@ -21,17 +34,51 @@ $(document).ready(function(){
     var dancerMakerFunction = window[dancerMakerFunctionName];
 
     // make a dancer with a random position
-
-    var h = $("body").height() * Math.random();
-    var w = $("body").width() * Math.random();
-    console.log(h + ' | ' + w);
-
     var dancer = new dancerMakerFunction(
-      h,
-      w,
+      $("body").height() * Math.random(),
+      $("body").width() * Math.random(),
       Math.random() * 1000
     );
-    $('body').append(dancer.$node);
+
+    window.dancers.push(dancer);
+    dancer.$node.attr('data-index', window.dancers.length-1);
+
+    if (dancerMakerFunctionName === 'addGuard') {
+      $('#guards').append(dancer.$node);
+    } else if (dancerMakerFunctionName === 'addForward') {
+      $('#forwards').append(dancer.$node);
+    } else {
+      $('#centers').append(dancer.$node);
+    }
+
+
+    //Jump Ball feature
+    $("#jump").click(function(){
+      $(".guard").animate({left: "10px"}, 2000, 'swing', function(){
+        // $(this).fadeOut('slow');
+        // $(this).fadeIn('fast');
+        console.log('Done' + );
+        });
+
+      var right = $("body").width() - 200;
+      right += "px";
+
+      $(".center").animate({left: right}, 2000, 'swing', function(){
+        $(this).fadeOut('slow');
+        $(this).fadeIn('fast');
+      });
+
+
+      var bottom = $("body").height() - 150;
+      bottom += "px";
+
+      $(".forward").animate({top: bottom}, 2000, 'swing', function(){
+        $(this).fadeOut('slow');
+        $(this).fadeIn('fast');
+      });
+    });
+
+    // $('body').append(dancer.$node);
   });
 });
 
