@@ -62,7 +62,6 @@ $(document).ready(function(){
     console.log(theShortestDancer)
 
     theShortestDancer.$node.css({'transform': 'rotate(90deg)'});
-    theShortestDancer.$node.css({'transform': 'rotate(0deg)'});
   });
 
   $(document).on('mouseover', '.dancer', function(){
